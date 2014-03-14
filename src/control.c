@@ -90,7 +90,7 @@ static Process_Status wait_process(Service_T s, Process_Status expect) {
         int debug = Run.debug, isrunning = FALSE;
         unsigned long now = time(NULL) * 1000, wait = 50;
         assert(s->start || s->restart);
-        unsigned long timeout = (s->start ? s->start->timeout : s->restart->timeout) * 1000 + now;
+        unsigned long timeout = (s->start ? s->start->timeout : s->restart->timeout) * 2000 + now;
         ASSERT(s);
         do {
                 Time_usleep(wait * USEC_PER_MSEC);
@@ -170,7 +170,7 @@ static int do_stop(Service_T s, int flag) {
                 Util_monitorUnset(s);
         else
                 Util_resetInfo(s);
-        
+
         return rv;
 }
 
